@@ -22,7 +22,6 @@ var recognition = new SpeechRecognition();
 
 var diagnostic = document.querySelector('.output');
 
-var maricon = 0;
 document.getElementById("inputobj2").onclick = function () {
 
     phrases = document.getElementById("inputobj1").value.split(',');
