@@ -3,6 +3,7 @@ var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
 var phrases = [''];
+var button = 0;
 var recognition = new SpeechRecognition();
 
 var diagnostic = document.querySelector('.output');
@@ -29,9 +30,18 @@ document.getElementById("inputobj2").onclick = function () {
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
+    if (button == 0) {
+        recognition.start();
+        button = 1;
+    } else if(button == 1) {
+        recognition.onend = function (event) {
+            console.log('SpeechRecognition.onend');
+            recognition.stop();
+            button = 0;
+        }
 
-    recognition.start();
-
+    }
+  
     recognition.onresult = function (event) {
         var speechResult = event.results[0][0].transcript.toLowerCase();
         console.log('Speech received: ' + speechResult + '.');
@@ -53,7 +63,8 @@ document.getElementById("inputobj2").onclick = function () {
     }
 
     recognition.onspeechend = function () {
-        recognition.stop();
+        //recognition.stop();
+        
     }
 
     recognition.onerror = function (event) {
@@ -68,12 +79,6 @@ document.getElementById("inputobj2").onclick = function () {
     recognition.onaudioend = function (event) {
         console.log('SpeechRecognition.onaudioend');
 
-    }
-
-    recognition.onend = function (event) {
-
-        console.log('SpeechRecognition.onend');
-        recognition.start();
     }
 
     recognition.onnomatch = function (event) {
@@ -95,11 +100,17 @@ document.getElementById("inputobj2").onclick = function () {
         console.log('SpeechRecognition.onspeechstart');
     }
     recognition.onstart = function (event) {
-        
          console.log('SpeechRecognition.onstart');
+         
     }
-}
+    recognition.onend = function (event) {
+        console.log('SpeechRecognition.onend');
+        recognition.start();
+    }
+    
 
+    
+}
 
 
 
