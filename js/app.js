@@ -2,6 +2,24 @@ var SpeechRecognition = SpeechRecognition || webkitSpeechRecognition
 var SpeechGrammarList = SpeechGrammarList || window.webkitSpeechGrammarList
 var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEvent
 
+var language = '';
+
+
+function changeLanguageAPI(lang) {
+    if (lang == "es") {
+        language = "es-ES";
+    }else if (lang == "en") {
+        language = "en-US";
+    } else if (lang == "fr") {
+        language = "fr-FR";
+    } else if (lang == "de") {
+        language = "de-DE";
+    } else if (lang == "it") {
+        language = "it-IT";
+    } 
+
+}
+
 var phrases = [''];
 var button = 0;
 var recognition = new SpeechRecognition();
@@ -26,7 +44,11 @@ document.getElementById("inputobj2").onclick = function () {
     speechRecognitionList.addFromString(grammar, 1);
     recognition.grammars = speechRecognitionList;
     recognition.constinuous = true;
-    recognition.lang = 'es-ES';
+    recognition.lang = language;
+    for (var i = 0; i < 100; i++) {
+        console.log(language);
+    }
+
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
@@ -39,7 +61,6 @@ document.getElementById("inputobj2").onclick = function () {
             recognition.stop();
             button = 0;
         }
-
     }
   
     recognition.onresult = function (event) {
