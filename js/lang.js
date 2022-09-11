@@ -1,7 +1,12 @@
+if(location.hash === ''){
+    location.hash = 'es';
+}
+
 function changeLanguage(lang) {
     location.hash = lang;
     location.reload();
 }
+
 var translations = {
     'en': {
         'button_text': 'Submit',
