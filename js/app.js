@@ -4,20 +4,16 @@ var SpeechRecognitionEvent = SpeechRecognitionEvent || webkitSpeechRecognitionEv
 
 var language = '';
 
-
-function changeLanguageAPI(lang) {
-    if (lang == "es") {
-        language = "es-ES";
-    }else if (lang == "en") {
-        language = "en-US";
-    } else if (lang == "fr") {
-        language = "fr-FR";
-    } else if (lang == "de") {
-        language = "de-DE";
-    } else if (lang == "it") {
-        language = "it-IT";
-    } 
-
+if(location.hash == '#es'){
+    language = 'es-ES';
+} else if(location.hash == '#fr'){
+    language = 'fr-FR';
+} else if(location.hash == '#de'){
+    language = 'de-DE';
+} else if(location.hash == '#it'){
+    language = 'it-IT';
+} else if (location.hash == '#en'){
+    language = 'en-US';
 }
 
 var phrases = [''];
@@ -45,10 +41,6 @@ document.getElementById("inputobj2").onclick = function () {
     recognition.grammars = speechRecognitionList;
     recognition.constinuous = true;
     recognition.lang = language;
-    for (var i = 0; i < 100; i++) {
-        console.log(language);
-    }
-
     recognition.interimResults = false;
     recognition.maxAlternatives = 1;
 
