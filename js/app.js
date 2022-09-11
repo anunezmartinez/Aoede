@@ -11,13 +11,15 @@ var maricon = 0;
 document.getElementById("inputobj2").onclick = function () {
 
     phrases = document.getElementById("inputobj1").value.split(',');
+
     phrases.forEach(function (v, i, a) {
         console.log(v, i);
     });
+    
 
     var speechRecognitionList = new SpeechGrammarList();
-
-    var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrases.join(' | ') + ';';
+    
+    var grammar = '#JSGF V1.0; grammar phrase; public <phrase> = ' + phrases.join(' | ')+ ';';
     var recognition = new SpeechRecognition();
     var speechRecognitionList = new SpeechGrammarList();
     speechRecognitionList.addFromString(grammar, 1);
@@ -33,8 +35,11 @@ document.getElementById("inputobj2").onclick = function () {
     recognition.onresult = function (event) {
         var speechResult = event.results[0][0].transcript.toLowerCase();
         console.log('Speech received: ' + speechResult + '.');
+
         for (let i = 0; i < phrases.length; i++) {
-            if (speechResult === phrases[i]) {
+
+            
+            if (speechResult === phrases[i].toLocaleLowerCase()) {
                 console.log('I heard the correct phrase!');
                 document.body.style.background = 'lime';
                 break;
